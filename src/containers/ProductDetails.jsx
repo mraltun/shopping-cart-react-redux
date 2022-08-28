@@ -10,6 +10,7 @@ import {
 const ProductDetails = () => {
   const product = useSelector((state) => state.product);
   const { image, title, price, category, description } = product;
+  // Get the ID from URL
   const { productId } = useParams();
   const dispatch = useDispatch();
 
@@ -24,6 +25,7 @@ const ProductDetails = () => {
   useEffect(() => {
     if (productId && productId !== "") fetchProductDetail();
 
+    // Clean up
     return () => {
       dispatch(removeSelectedProduct());
     };

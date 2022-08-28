@@ -5,6 +5,7 @@ import { setProducts } from "../redux/actions/productActions";
 import ProductComponent from "./ProductComponent";
 
 const ProductListing = () => {
+  // Get the state from redux store
   const products = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -12,6 +13,7 @@ const ProductListing = () => {
     const response = await axios("https://fakestoreapi.com/products").catch(
       (err) => console.log("Error", err)
     );
+    // Use dispatch to set state with action
     dispatch(setProducts(response.data));
   };
 

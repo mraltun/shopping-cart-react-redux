@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const ProductComponent = () => {
+  // Get only the products from state
   const products = useSelector((state) => state.allProducts.products);
 
   const renderList = products.map((product) => {
