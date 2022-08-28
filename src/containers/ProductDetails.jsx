@@ -25,7 +25,7 @@ const ProductDetails = () => {
   useEffect(() => {
     if (productId && productId !== "") fetchProductDetail();
 
-    // Clean up
+    // Clean up when the component is unmounted
     return () => {
       dispatch(removeSelectedProduct());
     };
