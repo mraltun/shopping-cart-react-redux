@@ -1,13 +1,16 @@
 // It's deprecated, use it for legacy code. "configureStore" from RTK is the better way.
-import { legacy_createStore } from "redux";
+import { legacy_createStore, applyMiddleware, compose } from "redux";
 import reducers from "./reducers/index";
+// For async
+import thunk from "redux-thunk";
 
-// Create the redux store with our reducer
+// Redux Devtools. Move here from store below because we use middlewares. We are also using compose to pass multiple store enhancers (HOF)
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+// Create the redux store with our combined reducers. Apply the thunk middleware.
 const store = legacy_createStore(
   reducers,
-  {},
-  // Redux Devtools
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 export default store;

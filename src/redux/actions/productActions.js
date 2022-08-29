@@ -1,6 +1,7 @@
 import { ActionTypes } from "../constants/actionTypes";
 import axios from "axios";
 
+// We need thunk for async
 export const fetchProducts = async (products) => {
   const response = await axios("/products");
 
