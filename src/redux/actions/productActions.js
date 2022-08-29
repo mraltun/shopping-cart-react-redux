@@ -1,13 +1,12 @@
 import { ActionTypes } from "../constants/actionTypes";
-import axios from "axios";
+import fakeStoreApi from "../../apis/fakeStoreApi";
 
-// We need thunk for async
-export const fetchProducts = async (products) => {
-  const response = await axios("/products");
+// We need to return plain JS Object so we can't make parent function async but the returning one. We are using thunk middleware.
+export const fetchProducts = (products) => {
+  return async function (dispatch, getState) {
+    const response = await fakeStoreApi("/products");
 
-  return {
-    type: ActionTypes.SET_PRODUCTS,
-    payload: products,
+    dispatch({ type: ActionTypes.FETCH_PRODUCTS, payload: response.data });
   };
 };
 
