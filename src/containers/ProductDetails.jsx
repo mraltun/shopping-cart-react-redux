@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import {
-  selectedProduct,
+  fetchProduct,
   removeSelectedProduct,
 } from "../redux/actions/productActions";
 
@@ -14,16 +13,8 @@ const ProductDetails = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
 
-  const fetchProductDetail = async () => {
-    const response = await axios(
-      `https://fakestoreapi.com/products/${productId}`
-    ).catch((err) => console.log("Error", err));
-
-    dispatch(selectedProduct(response.data));
-  };
-
   useEffect(() => {
-    if (productId && productId !== "") fetchProductDetail();
+    if (productId && productId !== "") dispatch(fetchProduct(productId));
 
     // Clean up when the component is unmounted
     return () => {
