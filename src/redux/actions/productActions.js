@@ -1,4 +1,14 @@
 import { ActionTypes } from "../constants/actionTypes";
+import axios from "axios";
+
+export const fetchProducts = async (products) => {
+  const response = await axios("/products");
+
+  return {
+    type: ActionTypes.SET_PRODUCTS,
+    payload: products,
+  };
+};
 
 export const setProducts = (products) => {
   return {

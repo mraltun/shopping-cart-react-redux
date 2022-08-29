@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { setProducts } from "../redux/actions/productActions";
+import { setProducts, fetchProducts } from "../redux/actions/productActions";
 import ProductComponent from "./ProductComponent";
 
 const ProductListing = () => {
@@ -9,16 +9,16 @@ const ProductListing = () => {
   const products = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const fetchProducts = async () => {
-    const response = await axios("https://fakestoreapi.com/products").catch(
-      (err) => console.log("Error", err)
-    );
-    // Use dispatch to set state with action
-    dispatch(setProducts(response.data));
-  };
+  // const fetchProducts = async () => {
+  //   const response = await axios("https://fakestoreapi.com/products").catch(
+  //     (err) => console.log("Error", err)
+  //   );
+  //   // Use dispatch to set state with action
+  //   dispatch(setProducts(response.data));
+  // };
 
   useEffect(() => {
-    fetchProducts();
+    dispatch(fetchProducts());
   }, []);
 
   return (
